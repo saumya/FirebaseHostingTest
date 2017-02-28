@@ -49,9 +49,31 @@
     </div>
   </nav>
 
-  <div class="container-fluid">
+  <div id="idMessages" class="container-fluid">
     <div id="idMsg" class="alert alert-success" role="alert"></div>
-    <h1>Still is a work in progress.</h1>
+  </div>
+
+  <div id="idHomeScreen" class="container-fluid">
+    <h3>Still is a work in progress.</h3>
+    <h1>Please login to continue.</h1>
+  </div>
+
+  <div id="idFormToFill" class="container-fluid">
+    <h3>Fillup your expenses.</h3>
+    <form>
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">@</span>
+        <input id="idPaidTo" type="text" class="form-control" placeholder="person name" aria-describedby="basic-addon1">
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">Rupees</span>
+        <input id="idPaidAmmount" type="text" class="form-control" placeholder="100" aria-label="Amount (to the nearest Rupees)">
+        <span class="input-group-addon">.00</span>
+      </div>
+      <div style="padding-top: 0.2em; padding-bottom: 0.2em;"></div>
+      <button id="idBtnPaid" type="button" class="btn btn-success">Paid</button>
+    </form>
+    
   </div>
 
 
