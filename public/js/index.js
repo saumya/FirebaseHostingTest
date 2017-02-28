@@ -1,6 +1,10 @@
 //
 $(function() {
   console.log('App ready!');
+  
+  // initialise
+  $("#idMsg").hide();
+
   // initialise Firebase
   firebase.initializeApp(allConfig.firebase);
   // event handlers
@@ -17,8 +21,11 @@ $(function() {
 	 var token = result.credential.accessToken;
 	 // The signed-in user info.
 	 var user = result.user;
-	 console.log('user',user);
+	 //console.log('user',user);
 
+	 $("#idMsg").html("Welcome back "+user.displayName+". You are now logged in.");
+	 $("#idMsg").show();
+	 
 	});
 	
 	/*
