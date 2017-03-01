@@ -8,6 +8,14 @@ $(function() {
   $("#idHomeScreen").show();
   $("#idMsg").hide();
   $("#idFormToFill").hide();
+  //
+  
+  $("#btnLogin").show();
+  $("#btnLogout").hide();
+  $("#btnAddPay").hide();
+  $("#btnViewPay").hide();
+  //$("#btnRemovePay").hide();
+
   
   // initialise Firebase
   firebase.initializeApp(allConfig.firebase);
@@ -21,27 +29,33 @@ $(function() {
 	provider.addScope('profile');
 	provider.addScope('email');
 	firebase.auth().signInWithPopup(provider).then(function(result) {
-	 // This gives you a Google Access Token.
-	 var token = result.credential.accessToken;
-	 // The signed-in user info.
-	 var user = result.user;
-	 //console.log('user',user);
+		// This gives you a Google Access Token.
+		var token = result.credential.accessToken;
+		// The signed-in user info.
+		var user = result.user;
+		//console.log('user',user);
 
-	 // Get a reference to the database service
-  	 var database = firebase.database();
+		// Get a reference to the database service
+		 var database = firebase.database();
 
-	 // Save a reference for future use
-	 UserObj.firebase.token = token;
-	 UserObj.firebase.user = user;
-	 UserObj.firebase.database = database;
+		// Save a reference for future use
+		UserObj.firebase.token = token;
+		UserObj.firebase.user = user;
+		UserObj.firebase.database = database;
 
-	 $("#idMsg").html("Welcome back "+user.displayName+". You are now logged in.");
-	 $("#idMsg").show();
-	 $("#idFormToFill").show();
-	 $("#idHomeScreen").hide();
-	 $("#idloggedInUser").html(" of "+user.displayName+".");
+		$("#idMsg").html("Welcome back "+user.displayName+". You are now logged in.");
+		$("#idMsg").show();
+		$("#idFormToFill").show();
+		$("#idHomeScreen").hide();
+		$("#idloggedInUser").html(" of "+user.displayName+".");
 
-	 console.log('UserObj',UserObj);
+		//
+		$("#btnLogin").hide();
+		$("#btnLogout").show();
+		$("#btnAddPay").show();
+		$("#btnViewPay").show();
+
+		//console.log('UserObj',UserObj);
 	 
 	});
 	/*
@@ -112,6 +126,24 @@ $(function() {
 		});
 		
 
+		return false;
+	});
+	//
+	//$("#btnLogin").hide();
+	$("#btnLogout").on('click',function(event){
+		alert('TODO: Logout');
+		return false;
+	});
+	$("#btnAddPay").on('click',function(event){
+		alert('TODO: Show Add View');
+		return false;
+	});
+	$("#btnViewPay").on('click',function(event){
+		alert('TODO: Show PaidView');
+		return false;
+	});
+	$(".btnRemovePay").on('click',function(event){
+		alert('TODO: Delete the entry');
 		return false;
 	});
 	//
