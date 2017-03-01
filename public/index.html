@@ -45,7 +45,8 @@
   </nav>
   <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
-      <h2>Expense.</h2>
+      <h4>Expense<span id="idloggedInUser"></span></h4>
+      <h6>XpNS.Beta 1.0.0</h6>
     </div>
   </nav>
 
@@ -54,7 +55,6 @@
   </div>
 
   <div id="idHomeScreen" class="container-fluid">
-    <h3>Still is a work in progress.</h3>
     <h1>Please login to continue.</h1>
   </div>
 
@@ -62,14 +62,19 @@
     <h3>Fillup your expenses.</h3>
     <form>
       <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">@</span>
-        <input id="idPaidTo" type="text" class="form-control" placeholder="person name" aria-describedby="basic-addon1">
+        <span class="input-group-addon" id="basic-addon1">Paid to</span>
+        <input id="idPaidTo" type="text" class="form-control" placeholder="person name" aria-describedby="basic-addon1"/>
       </div>
       <div class="input-group">
         <span class="input-group-addon">Rupees</span>
-        <input id="idPaidAmmount" type="text" class="form-control" placeholder="100" aria-label="Amount (to the nearest Rupees)">
+        <input id="idPaidAmmount" type="text" class="form-control" placeholder="100" aria-label="Amount (to the nearest Rupees)"/>
         <span class="input-group-addon">.00</span>
       </div>
+      <div class="input-group">
+        <span class="input-group-addon">Date</span>
+        <input id="idPaidDate" type="date" class="form-control"/>
+      </div>
+      
       <div style="padding-top: 0.2em; padding-bottom: 0.2em;"></div>
       <button id="idBtnPaid" type="button" class="btn btn-success">Paid</button>
     </form>

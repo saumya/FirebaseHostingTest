@@ -39,6 +39,7 @@ $(function() {
 	 $("#idMsg").show();
 	 $("#idFormToFill").show();
 	 $("#idHomeScreen").hide();
+	 $("#idloggedInUser").html(" of "+user.displayName+".");
 
 	 console.log('UserObj',UserObj);
 	 
@@ -61,13 +62,17 @@ $(function() {
 	firebase.auth().signInWithRedirect(provider);
 	*/
 	$("#idBtnPaid").on('click',function(event){
-		console.log('TODO: insert the data');
+		//console.log('TODO: insert the data');
 		//console.log('UserObj',UserObj);
 		var paidTo = $("#idPaidTo").val();
 		var paidAmmount = $("#idPaidAmmount").val();
+		//var paidDate = $("#idPaidDate").value;
+		var paidDate = $("#idPaidDate")[0].value;
+		// var a = new Date("2017-03-01"); // this is how we will get and use
+
 		var userId = firebase.auth().currentUser.uid;
 
-		console.log(paidTo,':',paidAmmount);
+		//console.log(paidTo,':',paidAmmount,':',paidDate);
 		/*
 		firebase.database().ref('paid/' + UserObj.firebase.user.uid).set({
 			person: paidTo,
@@ -88,6 +93,7 @@ $(function() {
 		});
 		*/
 
+		
 		// Get a reference to the database service
 		//var database = firebase.database();
 		var databaseRef = firebase.database().ref('paid/');
@@ -101,8 +107,10 @@ $(function() {
 		newPaidRef.set({
 		    paidById: userId,
 			paidTo: paidTo,
+			paidOn: paidDate,
 			ammount: paidAmmount
 		});
+		
 
 		return false;
 	});
