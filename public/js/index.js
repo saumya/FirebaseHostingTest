@@ -4,6 +4,7 @@ $(function() {
 
 	var UserObj = {id:'test',firebase:{}};
 	var dataSnapshot = {};
+	var currentUserDBPath = '';
 
 	// initialise
 	$("#idHomeScreen").show();
@@ -22,27 +23,35 @@ $(function() {
 	// initialise Firebase
 	firebase.initializeApp(allConfig.firebase);
 
-	// Get a reference to the database service
-	//var database = firebase.database();
-	var databaseRef = firebase.database().ref('paid/');
-	// datebase event handlers
-	databaseRef.on('value', function(snapshot) {
-		//addCommentElement(postElement, data.key, data.val().text, data.val().author);
-		console.log('databaseRef:value: event');
-		//$("#idMsg").html(UserObj.firebase.user.displayName+" you just paid to <h3>"+paidTo+"</h3>");
-		//$("#idMsg").show();
-		console.log('snapshot:',snapshot);
-		console.log('snapshot.val():',snapshot.val());
+	var getSnapshotFromFirebase = function(){
+		
+		//var userId = firebase.auth().currentUser.uid;
+		//var dbPath = 'paid/'+userId;
 
-		dataSnapshot = snapshot;
+		console.log('getSnapshotFromFirebase:currentUserDBPath:',currentUserDBPath);
 		/*
-		snapshot.forEach(function(childSnapshot) {
-			var childKey = childSnapshot.key;
-			var childData = childSnapshot.val();
-			console.log('childData:',childData);
+		// Get a reference to the database service
+		//var database = firebase.database();
+		var databaseRef = firebase.database().ref(currentUserDBPath);
+		// datebase event handlers
+		databaseRef.on('value', function(snapshot) {
+			
+			//addCommentElement(postElement, data.key, data.val().text, data.val().author);
+			console.log('databaseRef:value: event');
+			
+			//$("#idMsg").html(UserObj.firebase.user.displayName+" you just paid to <h3>"+paidTo+"</h3>");
+			//$("#idMsg").show();
+			//console.log('snapshot:',snapshot);
+			//console.log('snapshot.val():',snapshot.val());
+
+			dataSnapshot = snapshot;
+			
+			console.log('dataSnapshot',dataSnapshot);
 		});
 		*/
-	});
+	}
+
+	
 
   // user event handlers
   $("#btnLogin").on('click',function(){
@@ -68,6 +77,9 @@ $(function() {
 		UserObj.firebase.user = user;
 		UserObj.firebase.database = database;
 
+		//currentUserDBPath = 'paid/'+userId;
+		currentUserDBPath = 'paid/'+result.user.uid;
+
 		//$("#idMsg").html("Welcome back "+user.displayName+". You are now logged in.");
 		//$("#idMsg").show();
 		$("#idFormToFill").show();
@@ -81,6 +93,30 @@ $(function() {
 		$("#btnViewPay").show();
 
 		//console.log('UserObj',UserObj);
+
+		var databaseRef = firebase.database().ref(currentUserDBPath);
+		databaseRef.on('child_added', function(data) {
+			//addCommentElement(postElement, data.key, data.val().text, data.val().author);
+			//console.log('child_added:data:',data.val().paidTo);
+			//console.log('Data added');
+			$("#idMsg").html(UserObj.firebase.user.displayName+" you just paid to <h3>"+data.val().paidTo+"</h3>");
+			$("#idMsg").show();
+		});
+		databaseRef.on('value', function(snapshot) {
+			
+			//addCommentElement(postElement, data.key, data.val().text, data.val().author);
+			console.log('databaseRef:value: event');
+			
+			//$("#idMsg").html(UserObj.firebase.user.displayName+" you just paid to <h3>"+paidTo+"</h3>");
+			//$("#idMsg").show();
+			//console.log('snapshot:',snapshot);
+			//console.log('snapshot.val():',snapshot.val());
+
+			dataSnapshot = snapshot;
+			console.log('dataSnapshot',dataSnapshot);
+		});
+
+		getSnapshotFromFirebase();
 	 
 	});
 	/*
@@ -135,14 +171,19 @@ $(function() {
 		
 		// Get a reference to the database service
 		//var database = firebase.database();
-		var databaseRef = firebase.database().ref('paid/');
+		//var databaseRef = firebase.database().ref('paid/');
+		/*
+		var databaseRef = firebase.database().ref(currentUserDBPath);
+
 		databaseRef.on('child_added', function(data) {
 			//addCommentElement(postElement, data.key, data.val().text, data.val().author);
 			//console.log('Data added');
 			$("#idMsg").html(UserObj.firebase.user.displayName+" you just paid to <h3>"+paidTo+"</h3>");
 			$("#idMsg").show();
 		});
-		
+		*/
+
+		var databaseRef = firebase.database().ref(currentUserDBPath);
 		// Create a new paid reference with an auto-generated id
 		var newPaidRef = databaseRef.push();
 		newPaidRef.set({
@@ -171,6 +212,10 @@ $(function() {
 		//alert('TODO: Show PaidView');
 		$("#idFormToFill").hide();
 		$("#idDataToShow").show();
+		//
+		//$("#idTableOfPaid").empty();
+		var tblHeader = '<tr class="info"><td>To</td><td>Ammount</td><td>On</td><td>Remove</td></tr>'
+		$("#idTableOfPaid").html(tblHeader);
 		//
 		var userId = firebase.auth().currentUser.uid;
 		//var databaseRef = firebase.database().ref('paid/');
@@ -204,7 +249,11 @@ $(function() {
 		//console.log(event.target.id);
 		
 		var idToDelete = event.target.id;
-		var databaseRef = firebase.database().ref('paid/'+idToDelete);
+		
+		var deletePath = currentUserDBPath+'/'+idToDelete;
+		console.log('Delete:deletePath:'+deletePath);
+		//var databaseRef = firebase.database().ref('paid/'+idToDelete);
+		var databaseRef = firebase.database().ref(deletePath);
 		databaseRef.remove(function (error) {
 			if (!error) {
 				alert('Successfully Deleted.');
