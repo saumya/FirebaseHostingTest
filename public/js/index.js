@@ -8,6 +8,7 @@ $(function() {
   $("#idHomeScreen").show();
   $("#idMsg").hide();
   $("#idFormToFill").hide();
+  $("#idDataToShow").hide();
   //
   
   $("#btnLogin").show();
@@ -43,15 +44,15 @@ $(function() {
 		UserObj.firebase.user = user;
 		UserObj.firebase.database = database;
 
-		$("#idMsg").html("Welcome back "+user.displayName+". You are now logged in.");
-		$("#idMsg").show();
+		//$("#idMsg").html("Welcome back "+user.displayName+". You are now logged in.");
+		//$("#idMsg").show();
 		$("#idFormToFill").show();
 		$("#idHomeScreen").hide();
 		$("#idloggedInUser").html(" of "+user.displayName+".");
 
 		//
 		$("#btnLogin").hide();
-		$("#btnLogout").show();
+		//$("#btnLogout").show();
 		$("#btnAddPay").show();
 		$("#btnViewPay").show();
 
@@ -115,6 +116,7 @@ $(function() {
 			//addCommentElement(postElement, data.key, data.val().text, data.val().author);
 			//console.log('Data added');
 			$("#idMsg").html(UserObj.firebase.user.displayName+" you just paid to <h3>"+paidTo+"</h3>");
+			$("#idMsg").show();
 		});
 		// Create a new paid reference with an auto-generated id
 		var newPaidRef = databaseRef.push();
@@ -135,11 +137,15 @@ $(function() {
 		return false;
 	});
 	$("#btnAddPay").on('click',function(event){
-		alert('TODO: Show Add View');
+		//alert('TODO: Show Add View');
+		$("#idFormToFill").show();
+		$("#idDataToShow").hide();
 		return false;
 	});
 	$("#btnViewPay").on('click',function(event){
-		alert('TODO: Show PaidView');
+		//alert('TODO: Show PaidView');
+		$("#idFormToFill").hide();
+		$("#idDataToShow").show();
 		return false;
 	});
 	$(".btnRemovePay").on('click',function(event){
