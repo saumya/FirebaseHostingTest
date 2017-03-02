@@ -24,42 +24,12 @@ $(function() {
 	// initialise Firebase
 	firebase.initializeApp(allConfig.firebase);
 
-	var getSnapshotFromFirebase = function(){
-		
-		//var userId = firebase.auth().currentUser.uid;
-		//var dbPath = 'paid/'+userId;
-
-		console.log('getSnapshotFromFirebase:currentUserDBPath:',currentUserDBPath);
-		/*
-		// Get a reference to the database service
-		//var database = firebase.database();
-		var databaseRef = firebase.database().ref(currentUserDBPath);
-		// datebase event handlers
-		databaseRef.on('value', function(snapshot) {
-			
-			//addCommentElement(postElement, data.key, data.val().text, data.val().author);
-			console.log('databaseRef:value: event');
-			
-			//$("#idMsg").html(UserObj.firebase.user.displayName+" you just paid to <h3>"+paidTo+"</h3>");
-			//$("#idMsg").show();
-			//console.log('snapshot:',snapshot);
-			//console.log('snapshot.val():',snapshot.val());
-
-			dataSnapshot = snapshot;
-			
-			console.log('dataSnapshot',dataSnapshot);
-		});
-		*/
-	}
-
-	
-
   // user event handlers
   $("#btnLogin").on('click',function(){
   	console.log('login');
   	//console.log(allConfig.firebase);
   	
-  	// Using a popup.
+  	// Google Login : Using a popup. 
 	var provider = new firebase.auth.GoogleAuthProvider();
 	provider.addScope('profile');
 	provider.addScope('email');
@@ -127,11 +97,11 @@ $(function() {
 			console.log('dataSnapshot',dataSnapshot);
 		});
 
-		//getSnapshotFromFirebase();
 	 
 	});
+
 	/*
-	// Using a redirect.
+	// Google Login : Using a redirect. 
 	firebase.auth().getRedirectResult().then(function(result) {
 	  if (result.credential) {
 	    // This gives you a Google Access Token.
@@ -141,12 +111,14 @@ $(function() {
 	  console.log('user',user);
 	});
 
+
 	// Start a sign in process for an unauthenticated user.
 	var provider = new firebase.auth.GoogleAuthProvider();
 	provider.addScope('profile');
 	provider.addScope('email');
 	firebase.auth().signInWithRedirect(provider);
 	*/
+
 	$("#idBtnPaid").on('click',function(event){
 		//console.log('TODO: insert the data');
 		//console.log('UserObj',UserObj);
