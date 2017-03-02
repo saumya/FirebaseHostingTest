@@ -5,6 +5,7 @@ $(function() {
 	var UserObj = {id:'test',firebase:{}};
 	var dataSnapshot = {};
 	var currentUserDBPath = '';
+	var isBtnPaidClicked = false;
 
 	// initialise
 	$("#idHomeScreen").show();
@@ -95,17 +96,27 @@ $(function() {
 		//console.log('UserObj',UserObj);
 
 		var databaseRef = firebase.database().ref(currentUserDBPath);
+
 		databaseRef.on('child_added', function(data) {
 			//addCommentElement(postElement, data.key, data.val().text, data.val().author);
 			//console.log('child_added:data:',data.val().paidTo);
-			//console.log('Data added');
-			$("#idMsg").html(UserObj.firebase.user.displayName+" you just paid to <h3>"+data.val().paidTo+"</h3>");
-			$("#idMsg").show();
+			
+			console.log('child_added : event');
+			console.log('isBtnPaidClicked',isBtnPaidClicked);
+
+			if (isBtnPaidClicked==true) {
+				$("#idMsg").html(UserObj.firebase.user.displayName+" you just paid to <h3>"+data.val().paidTo+"</h3>");
+				$("#idMsg").show();
+				isBtnPaidClicked = false;
+			}else{
+				// Do Nothing
+			}
+			
 		});
 		databaseRef.on('value', function(snapshot) {
 			
 			//addCommentElement(postElement, data.key, data.val().text, data.val().author);
-			console.log('databaseRef:value: event');
+			console.log('value: event');
 			
 			//$("#idMsg").html(UserObj.firebase.user.displayName+" you just paid to <h3>"+paidTo+"</h3>");
 			//$("#idMsg").show();
@@ -116,7 +127,7 @@ $(function() {
 			console.log('dataSnapshot',dataSnapshot);
 		});
 
-		getSnapshotFromFirebase();
+		//getSnapshotFromFirebase();
 	 
 	});
 	/*
@@ -139,6 +150,10 @@ $(function() {
 	$("#idBtnPaid").on('click',function(event){
 		//console.log('TODO: insert the data');
 		//console.log('UserObj',UserObj);
+		
+		isBtnPaidClicked = true;
+		console.log('click: isBtnPaidClicked',isBtnPaidClicked);
+
 		var paidTo = $("#idPaidTo").val();
 		var paidAmmount = $("#idPaidAmmount").val();
 		//var paidDate = $("#idPaidDate").value;
@@ -148,40 +163,7 @@ $(function() {
 		var userId = firebase.auth().currentUser.uid;
 
 		//console.log(paidTo,':',paidAmmount,':',paidDate);
-		/*
-		firebase.database().ref('paid/' + UserObj.firebase.user.uid).set({
-			person: paidTo,
-			ammount: paidAmmount
-		});
-		*/
-		/*
-		var userId = firebase.auth().currentUser.uid;
-		var paidDbRef = firebase.database().ref('paid/');
-		paidDbRef.on('value', function(snapshot) {
-			//updateStarCount(postElement, snapshot.val());
-			alert('Successfully paid to '+paidTo);
-		});
-		firebase.database().ref('paid/').set({
-			paidById: userId,
-			person: paidTo,
-			ammount: paidAmmount
-		});
-		*/
-
 		
-		// Get a reference to the database service
-		//var database = firebase.database();
-		//var databaseRef = firebase.database().ref('paid/');
-		/*
-		var databaseRef = firebase.database().ref(currentUserDBPath);
-
-		databaseRef.on('child_added', function(data) {
-			//addCommentElement(postElement, data.key, data.val().text, data.val().author);
-			//console.log('Data added');
-			$("#idMsg").html(UserObj.firebase.user.displayName+" you just paid to <h3>"+paidTo+"</h3>");
-			$("#idMsg").show();
-		});
-		*/
 
 		var databaseRef = firebase.database().ref(currentUserDBPath);
 		// Create a new paid reference with an auto-generated id
@@ -192,6 +174,8 @@ $(function() {
 			paidOn: paidDate,
 			ammount: paidAmmount
 		});
+
+
 		
 
 		return false;
@@ -206,12 +190,14 @@ $(function() {
 		//alert('TODO: Show Add View');
 		$("#idFormToFill").show();
 		$("#idDataToShow").hide();
+		$("#idMsg").hide();
 		return false;
 	});
 	$("#btnViewPay").on('click',function(event){
 		//alert('TODO: Show PaidView');
 		$("#idFormToFill").hide();
 		$("#idDataToShow").show();
+		$("#idMsg").hide();
 		//
 		//$("#idTableOfPaid").empty();
 		var tblHeader = '<tr class="info"><td>To</td><td>Ammount</td><td>On</td><td>Remove</td></tr>'
