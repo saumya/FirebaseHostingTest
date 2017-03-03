@@ -172,7 +172,7 @@ $(function() {
 		$("#idMsg").hide();
 		//
 		//$("#idTableOfPaid").empty();
-		var tblHeader = '<tr class="info"><td>To</td><td>Ammount</td><td>On</td><td>Remove</td></tr>'
+		var tblHeader = '<tr class="info"><td>To</td><td>Ammount</td><td>On</td><td>Remove</td></tr>';
 		$("#idTableOfPaid").html(tblHeader);
 		//
 		var userId = firebase.auth().currentUser.uid;

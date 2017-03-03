@@ -17,3 +17,5 @@ var allConfig = {
 	app:{}
 }
 ```
+
+Currently its working fine as a proto.
