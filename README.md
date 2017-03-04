@@ -19,3 +19,8 @@ var allConfig = {
 ```
 
 Currently its working fine as a proto.
+
+### TODO
+ - UI fixing
+ - UX fixing
+ - Check if Native would be good or PWA
