@@ -1,7 +1,7 @@
 Firebase Test
 =============
  
- This application is for testing of firebase.
+ This application is for testing of firebase. This is done with jQuery and Firebase.
 
 The `config.js` file is not committed as it contains the settings. However the config file is as simple as below
 
