@@ -178,6 +178,7 @@ $(function() {
 		var userId = firebase.auth().currentUser.uid;
 		//var databaseRef = firebase.database().ref('paid/');
 		var allDataRows = '';
+		var totalPaid = 0;
 
 		dataSnapshot.forEach(function(childSnapshot) {
 			//snapshot.forEach(function(childSnapshot) {
@@ -192,8 +193,13 @@ $(function() {
 				var s = "<tr><td>"+childData.paidTo+"</td><td>"+childData.ammount+"</td><td>"+childData.paidOn+"</td><td>"+'<button id="'+childKey+'" type="button" class="btn btn-danger btnRemovePay"> X </button>'+"</td></tr>";
 				//console.log(s);
 				allDataRows += s;
+				//
+				totalPaid += Number(childData.ammount);
 			}
 		});
+
+		//console.log('Total Paid : ',totalPaid);
+		$("#idTotalExpense").html(' Total '+totalPaid+' Rupees.');
 
 		//console.log('allDataRows',allDataRows);
 		$("#idTableOfPaid").append(allDataRows);
