@@ -187,6 +187,9 @@ $(function() {
 			//console.log('childData:',childData);
 			//console.log('childKey',childKey);
 			//console.log('userId',userId,':: paidById',childData.paidById)
+			
+			// NO need for this check now. As each user has its DB url unique
+			/*
 			if(childData.paidById === userId){
 				//console.log('childData:',childData);
 				// render this data
@@ -196,6 +199,12 @@ $(function() {
 				//
 				totalPaid += Number(childData.ammount);
 			}
+			*/
+			
+			var s = "<tr><td>"+childData.paidTo+"</td><td>"+childData.ammount+"</td><td>"+childData.paidOn+"</td><td>"+'<button id="'+childKey+'" type="button" class="btn btn-danger btnRemovePay"> X </button>'+"</td></tr>";
+			allDataRows += s;
+			totalPaid += Number(childData.ammount);
+
 		});
 
 		//console.log('Total Paid : ',totalPaid);
