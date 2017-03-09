@@ -12,6 +12,7 @@ $(function() {
 	$("#idMsg").hide();
 	$("#idFormToFill").hide();
 	$("#idDataToShow").hide();
+	$("#idShortInfo").hide();
 	//
 
 	$("#btnLogin").show();
@@ -20,6 +21,8 @@ $(function() {
 	$("#btnViewPay").hide();
 	//$("#btnRemovePay").hide();
 	//$("#idTableOfPaid")
+	//$("#btnSortByName")
+	//$("#btnSortByDate")
   
 	// initialise Firebase
 	firebase.initializeApp(allConfig.firebase);
@@ -56,6 +59,10 @@ $(function() {
 		$("#idFormToFill").show();
 		$("#idHomeScreen").hide();
 		$("#idloggedInUser").html(" of "+user.displayName+".");
+		
+		//$("#idShortInfo").html("Wait a min till I am visible.");
+		$("#idShortInfo").html("<span class='label label-danger'>Wait a min till I am visible.</span>");
+		$("#idShortInfo").show();
 
 		//
 		$("#btnLogin").hide();
@@ -95,6 +102,8 @@ $(function() {
 
 			dataSnapshot = snapshot;
 			console.log('dataSnapshot',dataSnapshot);
+			//
+			$("#idShortInfo").hide();
 		});
 
 	 
@@ -236,6 +245,13 @@ $(function() {
 		});
 
 		return false;
+	});
+	//
+	$("#btnSortByName").on('click',function(event){
+		console.log('SortByName : TODO');
+	});
+	$("#btnSortByDate").on('click',function(event){
+		console.log('SortByDate : TODO');
 	});
 	//
   })
