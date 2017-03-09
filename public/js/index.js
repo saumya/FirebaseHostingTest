@@ -249,9 +249,36 @@ $(function() {
 	//
 	$("#btnSortByName").on('click',function(event){
 		console.log('SortByName : TODO');
+		utilsObj.test('SortByName : TODO');
 	});
 	$("#btnSortByDate").on('click',function(event){
-		console.log('SortByDate : TODO');
+		//console.log('SortByDate : WIP');
+		console.group('SortByDate : Start :');
+		
+		var sortedArray = utilsObj.sortByDate(dataSnapshot);
+		
+		var oneItemInArray,sSingleRow,allDataRows,childKey;
+		allDataRows = '';
+
+		console.log('sortedArray',sortedArray);
+		
+		// rendering the table again
+		
+		var tblHeader = '<tr class="info"><td>To</td><td>Ammount</td><td>On</td><td>Remove</td></tr>';
+		$("#idTableOfPaid").html(tblHeader);
+
+		for (var i = 0; i < sortedArray.length; i++) {
+			oneItemInArray = sortedArray[i];
+			console.log('oneItemInArray:',oneItemInArray);
+
+			var sSingleRow = "<tr><td>"+oneItemInArray.obj.paidTo+"</td><td>"+oneItemInArray.obj.ammount+"</td><td>"+oneItemInArray.obj.paidOn+"</td><td>"+'<button id="'+oneItemInArray.childKey+'" type="button" class="btn btn-danger btnRemovePay"> X </button>'+"</td></tr>";
+			allDataRows += sSingleRow;
+		}
+		$("#idTableOfPaid").append(allDataRows);
+
+		//
+		console.log('SortByDate : End :');
+		console.groupEnd();
 	});
 	//
   })
