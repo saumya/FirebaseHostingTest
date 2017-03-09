@@ -247,9 +247,9 @@ $(function() {
 		return false;
 	});
 	//
-	$("#btnSortByName").on('click',function(event){
-		console.log('SortByName : TODO');
-		utilsObj.test('SortByName : TODO');
+	$("#btnTotalByDate").on('click',function(event){
+		console.log('btnTotalByDate : TODO');
+		utilsObj.test('btnTotalByDate : TODO');
 	});
 	$("#btnSortByDate").on('click',function(event){
 		//console.log('SortByDate : WIP');
