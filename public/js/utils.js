@@ -22,7 +22,7 @@ var utilsObj = {
 			
 			var obj = childSnapshot.val();
 			var childKey = childSnapshot.key;
-			
+			/*
 			//console.log(obj);
 			//console.log(obj.paidOn);
 			
@@ -34,6 +34,8 @@ var utilsObj = {
 			var dat = dt.getDate();
 
 			//console.log(yr+':'+mot+':'+dat);
+			*/
+
 			dataArray.push({obj:obj,childKey:childKey});
 		});
 
@@ -59,5 +61,36 @@ var utilsObj = {
 		//console.groupEnd();
 
 		return dataArray;
+	},
+	getTotalOnDate: function(dataSnapshot,dateString){
+		console.group('utilsObj:getTotalOnDate:');
+		//var dDt = new Date(dateString);
+		var total = 0;
+
+		dataSnapshot.forEach(function(childSnapshot){
+			
+			var obj = childSnapshot.val();
+			//var childKey = childSnapshot.key;			
+			//console.log(obj);
+			//console.log(obj.paidOn);
+
+			//var dtPaidOn = new Date(obj.paidOn);
+			
+			//console.log('obj.paidOn',obj.paidOn);
+			//console.log('dtPaidOn',dtPaidOn);
+			//console.log('dDt',dDt);
+
+			//if(dDt === dtPaidOn){
+			if(dateString === obj.paidOn){
+				//console.log("=============================",obj.paidOn);
+				total += Number(obj.ammount);
+			}
+		});
+
+		console.log('Total : ',total);
+
+		console.groupEnd();
+
+		return total;
 	}
 };

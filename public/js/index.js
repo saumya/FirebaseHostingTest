@@ -14,6 +14,7 @@ $(function() {
 	$("#idFormToFill").hide();
 	$("#idDataToShow").hide();
 	$("#idShortInfo").hide();
+	$("#idInfoTotalForDayContainer").hide();
 	//
 
 	$("#btnLogin").show();
@@ -252,7 +253,20 @@ $(function() {
 	//
 	$("#btnTotalByDate").on('click',function(event){
 		console.log('btnTotalByDate : TODO');
-		utilsObj.test('btnTotalByDate : TODO');
+		var uDt = $('#idInputTotalByDate').val();
+		//var dDt = new Date(uDt);
+		
+		//console.log('Date :',dDt);
+		//utilsObj.test(dDt);
+
+		var totalAmmount = utilsObj.getTotalOnDate(dataSnapshot,uDt);
+
+		//alert('Total on '+uDt+' is '+totalAmmount);
+
+		$("#idInfoTotalForDay").html('On <strong>'+uDt+'</strong> its <strong>'+totalAmmount+'</strong>.');
+		$("#idInfoTotalForDayContainer").show();
+
+		//utilsObj.test('btnTotalByDate : TODO');
 	});
 	$("#btnSortByDate").on('click',function(event){
 		//console.log('SortByDate : WIP');
