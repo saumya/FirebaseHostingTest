@@ -58,7 +58,8 @@ $(function() {
 		//$("#idMsg").show();
 		$("#idFormToFill").show();
 		$("#idHomeScreen").hide();
-		$("#idloggedInUser").html(" of "+user.displayName+".");
+		//$("#idloggedInUser").html(" of "+user.displayName+".");
+		$("#idloggedInUser").html(user.displayName+" ");
 		
 		//$("#idShortInfo").html("Wait a min till I am visible.");
 		$("#idShortInfo").html("<span class='label label-danger'>Wait a min till I am visible.</span>");
@@ -217,7 +218,8 @@ $(function() {
 		});
 
 		//console.log('Total Paid : ',totalPaid);
-		$("#idTotalExpense").html(' Total '+totalPaid+' Rupees.');
+		//$("#idTotalExpense").html(' Total '+totalPaid+' Rupees.');
+		$("#idTotalExpense").html('  '+totalPaid+'.00');
 
 		//console.log('allDataRows',allDataRows);
 		$("#idTableOfPaid").append(allDataRows);
