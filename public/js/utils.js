@@ -10,7 +10,7 @@ var utilsObj = {
 	sortByName: function(){
 		console.log('utilsObj : sortByName :');
 	},
-	sortByDate: function(dataSnapshot){
+	sortByDate: function(dataSnapshot,isTrue){
 		//console.group('utilsObj : sortByDate : Start');
 		
 		//var dataObj = dataSnapshot.val();
@@ -44,8 +44,13 @@ var utilsObj = {
 			var firstDate = new Date(firstObj.obj.paidOn);
 			var nextDate = new Date(nextObj.obj.paidOn);
 			//console.log(firstDate,'::',nextDate);
-			return (firstDate<nextDate);// sort from now to late
+			//return (firstDate<nextDate);// sort from now to late
 			//return (firstDate>nextDate);// sort from last to now
+			if(isTrue){
+				return (firstDate<nextDate);
+			}else{
+				return (firstDate>nextDate);
+			}
 		});
 		//console.log('sorted : dataArray',dataArray);
 

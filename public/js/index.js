@@ -6,6 +6,7 @@ $(function() {
 	var dataSnapshot = {};
 	var currentUserDBPath = '';
 	var isBtnPaidClicked = false;
+	var isSortByDate = false;
 
 	// initialise
 	$("#idHomeScreen").show();
@@ -257,12 +258,13 @@ $(function() {
 		//console.log('SortByDate : WIP');
 		console.group('SortByDate : Start :');
 		
-		var sortedArray = utilsObj.sortByDate(dataSnapshot);
+		var sortedArray = utilsObj.sortByDate(dataSnapshot,isSortByDate);
+		isSortByDate = !isSortByDate;
 		
 		var oneItemInArray,sSingleRow,allDataRows,childKey;
 		allDataRows = '';
 
-		console.log('sortedArray',sortedArray);
+		//console.log('sortedArray',sortedArray);
 		
 		// rendering the table again
 		
