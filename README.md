@@ -20,6 +20,11 @@ var allConfig = {
 
 Currently its working fine as a proto.
 
+### Done
+
+- Add payment
+- View all
+
 ### TODO
  - Check for implemeting this in a framework
  - UI fixing
