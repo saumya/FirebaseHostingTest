@@ -263,7 +263,7 @@ $(function() {
 
 		//alert('Total on '+uDt+' is '+totalAmmount);
 
-		$("#idInfoTotalForDay").html('On <strong>'+uDt+'</strong> its <strong>'+totalAmmount+'</strong>.');
+		$("#idInfoTotalForDay").html('On <strong>'+uDt+'</strong> is <strong>'+totalAmmount+'</strong>.');
 		$("#idInfoTotalForDayContainer").show();
 
 		//utilsObj.test('btnTotalByDate : TODO');
@@ -297,6 +297,21 @@ $(function() {
 		//
 		console.log('SortByDate : End :');
 		console.groupEnd();
+	});
+
+	$("#btnTotalByPerson").on('click',function(event){
+		console.log('btnTotalByPerson : TODO');
+		var uName = $('#idInputTotalToPerson').val();
+		console.log('btnTotalByPerson : name:',uName);
+
+		var totalAmmount = utilsObj.getTotalPerPerson(dataSnapshot,uName);
+
+		//alert('Total on '+uDt+' is '+totalAmmount);
+		
+		$("#idInfoTotalForDay").html('Paid to <strong>'+uName+'</strong> is <strong>'+totalAmmount+'</strong>.');
+		$("#idInfoTotalForDayContainer").show();
+		
+		//
 	});
 	//
   })

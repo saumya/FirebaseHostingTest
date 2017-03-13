@@ -92,5 +92,20 @@ var utilsObj = {
 		console.groupEnd();
 
 		return total;
+	},
+	getTotalPerPerson: function(dataSnapshot,personName){
+		console.group('utilsObj:getTotalOnDate:');
+		
+		var total = 0;
+		dataSnapshot.forEach(function(childSnapshot){
+			var obj = childSnapshot.val();
+			if(personName === obj.paidTo){
+				total += Number(obj.ammount);
+			}
+		});
+
+		console.groupEnd();
+
+		return total;
 	}
 };
