@@ -107,5 +107,29 @@ var utilsObj = {
 		console.groupEnd();
 
 		return total;
+	},
+	getDataPerDate: function(dataSnapshot,dateString){
+		console.group('utilsObj:getDataPerDate:');
+
+		var dataArray = [];
+		var total = 0;
+		
+		dataSnapshot.forEach(function(childSnapshot){
+			
+			var obj = childSnapshot.val();
+			var childKey = childSnapshot.key;
+
+			if(dateString === obj.paidOn){
+				total += Number(obj.ammount);
+				//console.log('data:',obj);
+				//console.log('childKey:',childKey);
+				dataArray.push({obj:obj,childKey:childKey});
+			}
+		});
+
+		var result = {data:dataArray,total:total};
+
+		console.groupEnd();
+		return result;
 	}
 };

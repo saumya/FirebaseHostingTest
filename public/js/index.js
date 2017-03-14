@@ -182,6 +182,7 @@ $(function() {
 		$("#idFormToFill").hide();
 		$("#idDataToShow").show();
 		$("#idMsg").hide();
+		$("#idInfoTotalForDayContainer").hide();
 		//
 		//$("#idTableOfPaid").empty();
 		var tblHeader = '<tr class="info"><td>To</td><td>Ammount</td><td>On</td><td>Remove</td></tr>';
@@ -287,7 +288,7 @@ $(function() {
 
 		for (var i = 0; i < sortedArray.length; i++) {
 			oneItemInArray = sortedArray[i];
-			console.log('oneItemInArray:',oneItemInArray);
+			//console.log('oneItemInArray:',oneItemInArray);
 
 			var sSingleRow = "<tr><td>"+oneItemInArray.obj.paidTo+"</td><td>"+oneItemInArray.obj.ammount+"</td><td>"+oneItemInArray.obj.paidOn+"</td><td>"+'<button id="'+oneItemInArray.childKey+'" type="button" class="btn btn-danger btnRemovePay"> X </button>'+"</td></tr>";
 			allDataRows += sSingleRow;
@@ -297,6 +298,40 @@ $(function() {
 		//
 		console.log('SortByDate : End :');
 		console.groupEnd();
+
+		return false;
+	});
+
+	$("#btnShowByDate").on('click',function(event){
+		console.log('btnShowByDate : click : ');
+		//console.log(dataSnapshot.val());
+		
+		//var uName = $('#idInputTotalToPerson').val();
+		var uDt = $('#idInputTotalByDate').val();
+		var resultObj = utilsObj.getDataPerDate(dataSnapshot,uDt);
+		var arrayForDate = resultObj.data;
+		var total = resultObj.total;
+
+		//console.log(arrayForDate);
+
+		//render the UI
+		var tblHeader = '<tr class="info"><td>To</td><td>Ammount</td><td>On</td><td>Remove</td></tr>';
+		$("#idTableOfPaid").html(tblHeader);
+		//
+		var allDataRows = '';
+		for (var i = 0; i < arrayForDate.length; i++) {
+			oneItemInArray = arrayForDate[i];
+			//console.log('oneItemInArray:',oneItemInArray);
+
+			var sSingleRow = "<tr><td>"+oneItemInArray.obj.paidTo+"</td><td>"+oneItemInArray.obj.ammount+"</td><td>"+oneItemInArray.obj.paidOn+"</td><td>"+'<button id="'+oneItemInArray.childKey+'" type="button" class="btn btn-danger btnRemovePay"> X </button>'+"</td></tr>";
+			allDataRows += sSingleRow;
+		}
+		$("#idTableOfPaid").append(allDataRows);
+		//
+		$("#idInfoTotalForDay").html('On <strong>'+uDt+'</strong> is <strong>'+total+'</strong>.');
+		$("#idInfoTotalForDayContainer").show();
+
+		return false;
 	});
 
 	$("#btnTotalByPerson").on('click',function(event){
@@ -312,6 +347,7 @@ $(function() {
 		$("#idInfoTotalForDayContainer").show();
 		
 		//
+		return false;
 	});
 	//
   })
