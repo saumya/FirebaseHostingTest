@@ -136,19 +136,22 @@ $(function() {
 		//console.log('UserObj',UserObj);
 		
 		isBtnPaidClicked = true;
-		console.log('click: isBtnPaidClicked',isBtnPaidClicked);
+		//console.log('click: isBtnPaidClicked',isBtnPaidClicked);
 
 		var paidTo = $("#idPaidTo").val();
 		var paidAmmount = $("#idPaidAmmount").val();
 		//var paidDate = $("#idPaidDate").value;
 		var paidDate = $("#idPaidDate")[0].value;
 		// var a = new Date("2017-03-01"); // this is how we will get and use
+		var paidForProject = $("#idPaidForProject").val();
+
+		//console.log('project name : ',paidForProject);
 
 		var userId = firebase.auth().currentUser.uid;
 
 		//console.log(paidTo,':',paidAmmount,':',paidDate);
 		
-
+		
 		var databaseRef = firebase.database().ref(currentUserDBPath);
 		// Create a new paid reference with an auto-generated id
 		var newPaidRef = databaseRef.push();
@@ -156,8 +159,10 @@ $(function() {
 		    paidById: userId,
 			paidTo: paidTo,
 			paidOn: paidDate,
-			ammount: paidAmmount
+			ammount: paidAmmount,
+			paidForProject:paidForProject
 		});
+		
 
 
 		
@@ -214,12 +219,17 @@ $(function() {
 			}
 			*/
 			
-			var s1 = "<tr style='background:#CCCCCC;border-style:solid;border-width:1px;'><td>"+childData.paidTo+"</td><td>"+childData.ammount+"</td><td>"+childData.paidOn+"</td><td>"+'<button id="'+childKey+'" type="button" class="btn btn-danger btnRemovePay"> X </button>'+"</td></tr>";
+			var s1 = "<tr style='line-height:3em;background:#CCCCCC;border-style:solid;border-width:1px;'><td>"+childData.paidTo+"</td><td>"+childData.ammount+"</td><td>"+childData.paidOn+"</td><td>"+'<button id="'+childKey+'" type="button" class="btn btn-danger btnRemovePay"> X </button>'+"</td></tr>";
 			//var s2 = "<tr style='background:#AAAAAA;'><td colspan='4'>"+"Project Name"+"</td></tr>";
 			var s2 = "";
-			
-			//s2 = "<tr style='background:#AAAAAA;'><td colspan='4'>"+" ."+"</td></tr>";
-			
+
+			if(childData.paidForProject===undefined){
+				// Do Nothing
+			}else{
+				// paidForProject
+				s2 = "<tr style='background:#AAAAAA;'><td colspan='4'> for <strong>"+childData.paidForProject+"</strong></td></tr>";
+			}
+
 			var s = s1+s2;
 			allDataRows += s;
 			totalPaid += Number(childData.ammount);
