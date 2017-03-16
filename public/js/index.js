@@ -214,7 +214,13 @@ $(function() {
 			}
 			*/
 			
-			var s = "<tr><td>"+childData.paidTo+"</td><td>"+childData.ammount+"</td><td>"+childData.paidOn+"</td><td>"+'<button id="'+childKey+'" type="button" class="btn btn-danger btnRemovePay"> X </button>'+"</td></tr>";
+			var s1 = "<tr style='background:#CCCCCC;border-style:solid;border-width:1px;'><td>"+childData.paidTo+"</td><td>"+childData.ammount+"</td><td>"+childData.paidOn+"</td><td>"+'<button id="'+childKey+'" type="button" class="btn btn-danger btnRemovePay"> X </button>'+"</td></tr>";
+			//var s2 = "<tr style='background:#AAAAAA;'><td colspan='4'>"+"Project Name"+"</td></tr>";
+			var s2 = "";
+			
+			//s2 = "<tr style='background:#AAAAAA;'><td colspan='4'>"+" ."+"</td></tr>";
+			
+			var s = s1+s2;
 			allDataRows += s;
 			totalPaid += Number(childData.ammount);
 
