@@ -351,9 +351,9 @@ $(function() {
 	});
 
 	$("#btnTotalByPerson").on('click',function(event){
-		console.log('btnTotalByPerson : TODO');
+		
 		var uName = $('#idInputTotalToPerson').val();
-		console.log('btnTotalByPerson : name:',uName);
+		//console.log('btnTotalByPerson : name:',uName);
 
 		var totalAmmount = utilsObj.getTotalPerPerson(dataSnapshot,uName);
 
@@ -363,6 +363,33 @@ $(function() {
 		$("#idInfoTotalForDayContainer").show();
 		
 		//
+		return false;
+	});
+	$("#btnShowByPerson").on('click',function(event){
+		console.log('ShowByPerson : TODO');
+
+		var uName = $('#idInputTotalToPerson').val();
+		var resultObj = utilsObj.getDataPerPerson(dataSnapshot,uName);
+		var arrayForDate = resultObj.data;
+		var total = resultObj.total;
+
+		//render the UI
+		var tblHeader = '<tr class="info"><td>To</td><td>Ammount</td><td>On</td><td>Remove</td></tr>';
+		$("#idTableOfPaid").html(tblHeader);
+		//
+		var allDataRows = '';
+		for (var i = 0; i < arrayForDate.length; i++) {
+			oneItemInArray = arrayForDate[i];
+			//console.log('oneItemInArray:',oneItemInArray);
+
+			var sSingleRow = "<tr><td>"+oneItemInArray.obj.paidTo+"</td><td>"+oneItemInArray.obj.ammount+"</td><td>"+oneItemInArray.obj.paidOn+"</td><td>"+'<button id="'+oneItemInArray.childKey+'" type="button" class="btn btn-danger btnRemovePay"> X </button>'+"</td></tr>";
+			allDataRows += sSingleRow;
+		}
+		$("#idTableOfPaid").append(allDataRows);
+		//
+		$("#idInfoTotalForDay").html('Paid to <strong>'+uName+'</strong> is <strong>'+total+'</strong>.');
+		$("#idInfoTotalForDayContainer").show();
+
 		return false;
 	});
 	//
