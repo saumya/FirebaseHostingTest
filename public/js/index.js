@@ -96,7 +96,7 @@ $(function() {
 		databaseRef.on('value', function(snapshot) {
 			
 			//addCommentElement(postElement, data.key, data.val().text, data.val().author);
-			console.log('value: event');
+			console.log('value:event');
 			
 			//$("#idMsg").html(UserObj.firebase.user.displayName+" you just paid to <h3>"+paidTo+"</h3>");
 			//$("#idMsg").show();
@@ -104,7 +104,8 @@ $(function() {
 			//console.log('snapshot.val():',snapshot.val());
 
 			dataSnapshot = snapshot;
-			console.log('dataSnapshot',dataSnapshot);
+			//console.log('dataSnapshot',dataSnapshot);
+			//console.log('dataSnapshot.val()',dataSnapshot.val());
 			//
 			$("#idShortInfo").hide();
 		});
@@ -388,6 +389,33 @@ $(function() {
 		$("#idTableOfPaid").append(allDataRows);
 		//
 		$("#idInfoTotalForDay").html('Paid to <strong>'+uName+'</strong> is <strong>'+total+'</strong>.');
+		$("#idInfoTotalForDayContainer").show();
+
+		return false;
+	});
+
+	$("#btnShowByProject").on('click',function(event){
+		//console.log('btnShowByProject:click:');
+		var uName = $("#idInputTotalToProject").val();
+		var resultObj = utilsObj.getDataForProject(dataSnapshot,uName);
+		var arrayForDate = resultObj.data;
+		var total = resultObj.total;
+
+		//render the UI
+		var tblHeader = '<tr class="info"><td>To</td><td>Ammount</td><td>On</td><td>Remove</td></tr>';
+		$("#idTableOfPaid").html(tblHeader);
+		//
+		var allDataRows = '';
+		for (var i = 0; i < arrayForDate.length; i++) {
+			oneItemInArray = arrayForDate[i];
+			//console.log('oneItemInArray:',oneItemInArray);
+
+			var sSingleRow = "<tr><td>"+oneItemInArray.obj.paidTo+"</td><td>"+oneItemInArray.obj.ammount+"</td><td>"+oneItemInArray.obj.paidOn+"</td><td>"+'<button id="'+oneItemInArray.childKey+'" type="button" class="btn btn-danger btnRemovePay"> X </button>'+"</td></tr>";
+			allDataRows += sSingleRow;
+		}
+		$("#idTableOfPaid").append(allDataRows);
+		//
+		$("#idInfoTotalForDay").html('For project <strong>'+uName+'</strong> is <strong>'+total+'</strong>.');
 		$("#idInfoTotalForDayContainer").show();
 
 		return false;

@@ -155,5 +155,29 @@ var utilsObj = {
 
 		console.groupEnd();
 		return result;
+	},
+	getDataForProject: function(dataSnapshot,nameString){
+		console.group('utilsObj:getDataForProject:');
+
+		var dataArray = [];
+		var total = 0;
+		
+		dataSnapshot.forEach(function(childSnapshot){
+			
+			var obj = childSnapshot.val();
+			var childKey = childSnapshot.key;
+
+			if(nameString === obj.paidForProject){
+				total += Number(obj.ammount);
+				//console.log('data:',obj);
+				//console.log('childKey:',childKey);
+				dataArray.push({obj:obj,childKey:childKey});
+			}
+		});
+
+		var result = {data:dataArray,total:total};
+
+		console.groupEnd();
+		return result;
 	}
 };
