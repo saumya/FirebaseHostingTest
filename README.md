@@ -24,6 +24,7 @@ Currently its working fine as a proto.
 
 - Add payment
 - View all
+- View by Person, Project, Date
 
 ### TODO
  - Check for implemeting this in a framework
