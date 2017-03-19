@@ -28,6 +28,4 @@ Currently its working fine as a proto.
 
 ### TODO
  - Check for implemeting this in a framework
- - UI fixing
- - UX fixing
  - Check if Native would be good or PWA
