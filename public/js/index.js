@@ -1,6 +1,6 @@
 //
 $(function() {
-	console.log('App ready!');
+	console.log('===== App ready! ===== ');
 
 	var UserObj = {id:'test',firebase:{}};
 	var dataSnapshot = {};
