@@ -81,8 +81,8 @@ $(function() {
 			//addCommentElement(postElement, data.key, data.val().text, data.val().author);
 			//console.log('child_added:data:',data.val().paidTo);
 			
-			console.log('child_added : event');
-			console.log('isBtnPaidClicked',isBtnPaidClicked);
+			//console.log('child_added : event');
+			//console.log('isBtnPaidClicked',isBtnPaidClicked);
 
 			if (isBtnPaidClicked==true) {
 				$("#idMsg").html(UserObj.firebase.user.displayName+" you just paid to <h3>"+data.val().paidTo+"</h3>");
@@ -232,7 +232,7 @@ $(function() {
 					//Do Nothing
 				}else{
 					// paidForProject
-				s2 = "<tr style='background:#AAAAAA;'><td colspan='4'> for <strong>"+childData.paidForProject+"</strong></td></tr>";
+					s2 = "<tr style='background:#AAAAAA;'><td colspan='4'> for <strong>"+childData.paidForProject+"</strong></td></tr>";
 				}
 			}
 
