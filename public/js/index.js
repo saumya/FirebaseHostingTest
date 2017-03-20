@@ -227,8 +227,13 @@ $(function() {
 			if(childData.paidForProject===undefined){
 				// Do Nothing
 			}else{
-				// paidForProject
+				console.log('childData.paidForProject',childData.paidForProject);
+				if(childData.paidForProject===''){
+					//Do Nothing
+				}else{
+					// paidForProject
 				s2 = "<tr style='background:#AAAAAA;'><td colspan='4'> for <strong>"+childData.paidForProject+"</strong></td></tr>";
+				}
 			}
 
 			var s = s1+s2;
@@ -367,7 +372,7 @@ $(function() {
 		return false;
 	});
 	$("#btnShowByPerson").on('click',function(event){
-		console.log('ShowByPerson : TODO');
+		console.log('ShowByPerson :');
 
 		var uName = $('#idInputTotalToPerson').val();
 		var resultObj = utilsObj.getDataPerPerson(dataSnapshot,uName);
