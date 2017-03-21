@@ -23,7 +23,6 @@ Currently its working fine as a proto.
 ### Done
 
 - Add payment
-- View all
 - View by Person, Project, Date
 
 ### TODO
