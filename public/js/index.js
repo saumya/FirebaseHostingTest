@@ -253,7 +253,7 @@ $(function() {
 	});
 	//$(".btnRemovePay").on('click',function(event){
 	$("#idTableOfPaid").on('click','.btnRemovePay',function(event){
-		//alert('TODO: Delete the entry');
+		
 		//console.log(event.target);
 		//console.log(event.target.id);
 		
@@ -284,7 +284,6 @@ $(function() {
 
 		var totalAmmount = utilsObj.getTotalOnDate(dataSnapshot,uDt);
 
-		//alert('Total on '+uDt+' is '+totalAmmount);
 
 		$("#idInfoTotalForDay").html('On <strong>'+uDt+'</strong> is <strong>'+totalAmmount+'</strong>.');
 		$("#idInfoTotalForDayContainer").show();
@@ -363,7 +362,6 @@ $(function() {
 
 		var totalAmmount = utilsObj.getTotalPerPerson(dataSnapshot,uName);
 
-		//alert('Total on '+uDt+' is '+totalAmmount);
 		
 		$("#idInfoTotalForDay").html('Paid to <strong>'+uName+'</strong> is <strong>'+totalAmmount+'</strong>.');
 		$("#idInfoTotalForDayContainer").show();
