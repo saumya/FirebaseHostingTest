@@ -26,5 +26,24 @@ Currently its working fine as a proto.
 - View by Person, Project, Date
 
 ### TODO
+ - Add Project
+ - Add Person
+ - Make Person dropdown
+ - Make Project dropdown
+ - UI redesign
  - Check for implemeting this in a framework
  - Check if Native would be good or PWA
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
