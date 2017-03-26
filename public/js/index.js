@@ -25,6 +25,10 @@ $(function() {
 	//$("#idTableOfPaid")
 	//$("#btnSortByName")
 	//$("#btnSortByDate")
+	$("#idHomeScreenDate").html("");
+	//show today
+	var today = new Date();
+	$("#idHomeScreenDate").html("Today is "+today.getDate()+"."+(today.getMonth()+1)+"."+(today.getFullYear()+"."));
   
 	// initialise Firebase
 	firebase.initializeApp(allConfig.firebase);
