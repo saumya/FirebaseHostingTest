@@ -208,7 +208,7 @@ $(function() {
 			var childKey = childSnapshot.key;
 			var childData = childSnapshot.val();
 			//console.log('childData:',childData);
-			//console.log('childKey',childKey);
+			console.log('childKey',childKey);
 			//console.log('userId',userId,':: paidById',childData.paidById)
 			
 			// NO need for this check now. As each user has its DB url unique
@@ -223,27 +223,31 @@ $(function() {
 				totalPaid += Number(childData.ammount);
 			}
 			*/
-			
-			var s1 = "<tr style='line-height:3em;background:#CCCCCC;border-style:solid;border-width:1px;'><td>"+childData.paidTo+"</td><td>"+childData.ammount+"</td><td>"+childData.paidOn+"</td><td>"+'<button id="'+childKey+'" type="button" class="btn btn-danger btnRemovePay"> X </button>'+"</td></tr>";
-			//var s2 = "<tr style='background:#AAAAAA;'><td colspan='4'>"+"Project Name"+"</td></tr>";
-			var s2 = "";
 
-			if(childData.paidForProject===undefined){
-				// Do Nothing
+			//remove the 'projects' and 'persons' data
+			if((childKey==='projects')||(childKey==='persons')){
+				//Do Nothing
 			}else{
-				console.log('childData.paidForProject',childData.paidForProject);
-				if(childData.paidForProject===''){
-					//Do Nothing
+				var s1 = "<tr style='line-height:3em;background:#CCCCCC;border-style:solid;border-width:1px;'><td>"+childData.paidTo+"</td><td>"+childData.ammount+"</td><td>"+childData.paidOn+"</td><td>"+'<button id="'+childKey+'" type="button" class="btn btn-danger btnRemovePay"> X </button>'+"</td></tr>";
+				//var s2 = "<tr style='background:#AAAAAA;'><td colspan='4'>"+"Project Name"+"</td></tr>";
+				var s2 = "";
+
+				if(childData.paidForProject===undefined){
+					// Do Nothing
 				}else{
-					// paidForProject
-					s2 = "<tr style='background:#AAAAAA;'><td colspan='4'> for <strong>"+childData.paidForProject+"</strong></td></tr>";
+					//console.log('childData.paidForProject',childData.paidForProject);
+					if(childData.paidForProject===''){
+						//Do Nothing
+					}else{
+						// paidForProject
+						s2 = "<tr style='background:#AAAAAA;'><td colspan='4'> for <strong>"+childData.paidForProject+"</strong></td></tr>";
+					}
 				}
-			}
 
-			var s = s1+s2;
-			allDataRows += s;
-			totalPaid += Number(childData.ammount);
-
+				var s = s1+s2;
+				allDataRows += s;
+				totalPaid += Number(childData.ammount);
+			}//END if-else
 		});
 
 		//console.log('Total Paid : ',totalPaid);
