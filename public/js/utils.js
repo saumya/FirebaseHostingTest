@@ -109,8 +109,8 @@ var utilsObj = {
 		return total;
 	},
 	getDataPerDate: function(dataSnapshot,dateString){
-		console.group('utilsObj:getDataPerDate:');
-
+		console.log('utilsObj:getDataPerDate:');
+		/*
 		var dataArray = [];
 		var total = 0;
 		
@@ -128,13 +128,39 @@ var utilsObj = {
 		});
 
 		var result = {data:dataArray,total:total};
-
-		console.groupEnd();
+		return result;
+		*/
+		var total = 0;
+		var aPayments = [];
+		//
+		dataSnapshot.forEach(function(childSnapshot){
+			var obj = childSnapshot.val();
+			var childKey = childSnapshot.key;
+			if((childKey==='persons')||(childKey==='projects')){
+				//Do Nothing
+				//console.log('Exclude : childKey',childKey,obj);
+			}else{
+				if(dateString === obj.paidOn){
+					// adding childkey to the object as we need it for `delete`
+					obj.childKey = childKey;
+					aPayments.push(obj);
+					total += Number(obj.ammount);
+				}
+			}
+		});
+		// sort the array
+		aPayments.sort(function(a,b){
+			return(
+				 (new Date(a['paidOn']).getTime()) - (new Date(b['paidOn']).getTime())
+			)
+		});
+		//
+		var result = {data:aPayments,total:total};
 		return result;
 	},
 	getDataPerPerson: function(dataSnapshot,nameString){
-		console.group('utilsObj:getDataPerPerson:');
-
+		console.log('utilsObj:getDataPerPerson:');
+		/*
 		var dataArray = [];
 		var total = 0;
 		
@@ -152,16 +178,41 @@ var utilsObj = {
 		});
 
 		var result = {data:dataArray,total:total};
-
-		console.groupEnd();
+		*/
+		
+		var total = 0;
+		var aPayments = [];
+		//
+		dataSnapshot.forEach(function(childSnapshot){
+			var obj = childSnapshot.val();
+			var childKey = childSnapshot.key;
+			if((childKey==='persons')||(childKey==='projects')){
+				//Do Nothing
+				//console.log('Exclude : childKey',childKey,obj);
+			}else{
+				if(nameString === obj.paidTo){
+					// adding childkey to the object as we need it for `delete`
+					obj.childKey = childKey;
+					aPayments.push(obj);
+					total += Number(obj.ammount);
+				}
+			}
+		});
+		// sort the array
+		aPayments.sort(function(a,b){
+			return(
+				 (new Date(a['paidOn']).getTime()) - (new Date(b['paidOn']).getTime())
+			)
+		});
+		//
+		var result = {data:aPayments,total:total};
 		return result;
 	},
 	getDataForProject: function(dataSnapshot,nameString){
-		console.group('utilsObj:getDataForProject:');
-
+		console.log('utilsObj:getDataForProject:');
+		/*
 		var dataArray = [];
 		var total = 0;
-		
 		dataSnapshot.forEach(function(childSnapshot){
 			
 			var obj = childSnapshot.val();
@@ -174,10 +225,34 @@ var utilsObj = {
 				dataArray.push({obj:obj,childKey:childKey});
 			}
 		});
+		*/
 
-		var result = {data:dataArray,total:total};
-
-		console.groupEnd();
+		var total = 0;
+		var aPayments = [];
+		//
+		dataSnapshot.forEach(function(childSnapshot){
+			var obj = childSnapshot.val();
+			var childKey = childSnapshot.key;
+			if((childKey==='persons')||(childKey==='projects')){
+				//Do Nothing
+				//console.log('Exclude : childKey',childKey,obj);
+			}else{
+				if(nameString === obj.paidForProject){
+					// adding childkey to the object as we need it for `delete`
+					obj.childKey = childKey;
+					aPayments.push(obj);
+					total += Number(obj.ammount);
+				}
+			}
+		});
+		// sort the array
+		aPayments.sort(function(a,b){
+			return(
+				 (new Date(a['paidOn']).getTime()) - (new Date(b['paidOn']).getTime())
+			)
+		});
+		//
+		var result = {data:aPayments,total:total};
 		return result;
 	},
 	// Descending order
@@ -197,6 +272,7 @@ var utilsObj = {
 				//Do Nothing
 				//console.log('Exclude : childKey',childKey,obj);
 			}else{
+				// adding childkey to the object as we need it for `delete`
 				obj.childKey = childKey;
 				aPayments.push(obj)
 			}

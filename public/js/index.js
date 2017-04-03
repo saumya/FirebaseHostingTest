@@ -237,6 +237,9 @@ $(function() {
 		});*/
 
 		var childData,childKey,s,s1,s2 = '';
+		// ascending
+		//for (var i = 0; i < allPayments.length; i++) {
+		// descending
 		for (var i = allPayments.length - 1; i >= 0; i--) {
 			childData = allPayments[i]
 			childKey = '';//TODO: fix this
@@ -346,23 +349,26 @@ $(function() {
 		var total = resultObj.total;
 
 		//console.log(arrayForDate);
+		
 
 		//render the UI
 		var tblHeader = '<tr class="info"><td>To</td><td>Ammount</td><td>On</td><td>Remove</td></tr>';
 		$("#idTableOfPaid").html(tblHeader);
 		//
 		var allDataRows = '';
+		var oneItemInArray = '';
 		for (var i = 0; i < arrayForDate.length; i++) {
 			oneItemInArray = arrayForDate[i];
 			//console.log('oneItemInArray:',oneItemInArray);
 
-			var sSingleRow = "<tr><td>"+oneItemInArray.obj.paidTo+"</td><td>"+oneItemInArray.obj.ammount+"</td><td>"+oneItemInArray.obj.paidOn+"</td><td>"+'<button id="'+oneItemInArray.childKey+'" type="button" class="btn btn-danger btnRemovePay"> X </button>'+"</td></tr>";
+			var sSingleRow = "<tr><td>"+oneItemInArray.paidTo+"</td><td>"+oneItemInArray.ammount+"</td><td>"+oneItemInArray.paidOn+"</td><td>"+'<button id="'+oneItemInArray.childKey+'" type="button" class="btn btn-danger btnRemovePay"> X </button>'+"</td></tr>";
 			allDataRows += sSingleRow;
 		}
 		$("#idTableOfPaid").append(allDataRows);
 		//
 		$("#idInfoTotalForDay").html('On <strong>'+uDt+'</strong> is <strong>'+total+'</strong>.');
 		$("#idInfoTotalForDayContainer").show();
+
 
 		return false;
 	});
@@ -394,11 +400,14 @@ $(function() {
 		$("#idTableOfPaid").html(tblHeader);
 		//
 		var allDataRows = '';
+		var oneItemInArray = '';
+		var sSingleRow = '';
+
 		for (var i = 0; i < arrayForDate.length; i++) {
 			oneItemInArray = arrayForDate[i];
 			//console.log('oneItemInArray:',oneItemInArray);
 
-			var sSingleRow = "<tr><td>"+oneItemInArray.obj.paidTo+"</td><td>"+oneItemInArray.obj.ammount+"</td><td>"+oneItemInArray.obj.paidOn+"</td><td>"+'<button id="'+oneItemInArray.childKey+'" type="button" class="btn btn-danger btnRemovePay"> X </button>'+"</td></tr>";
+			var sSingleRow = "<tr><td>"+oneItemInArray.paidTo+"</td><td>"+oneItemInArray.ammount+"</td><td>"+oneItemInArray.paidOn+"</td><td>"+'<button id="'+oneItemInArray.childKey+'" type="button" class="btn btn-danger btnRemovePay"> X </button>'+"</td></tr>";
 			allDataRows += sSingleRow;
 		}
 		$("#idTableOfPaid").append(allDataRows);
@@ -421,11 +430,14 @@ $(function() {
 		$("#idTableOfPaid").html(tblHeader);
 		//
 		var allDataRows = '';
+		var oneItemInArray = '';
+		var sSingleRow = '';
+
 		for (var i = 0; i < arrayForDate.length; i++) {
 			oneItemInArray = arrayForDate[i];
 			//console.log('oneItemInArray:',oneItemInArray);
 
-			var sSingleRow = "<tr><td>"+oneItemInArray.obj.paidTo+"</td><td>"+oneItemInArray.obj.ammount+"</td><td>"+oneItemInArray.obj.paidOn+"</td><td>"+'<button id="'+oneItemInArray.childKey+'" type="button" class="btn btn-danger btnRemovePay"> X </button>'+"</td></tr>";
+			sSingleRow = "<tr><td>"+oneItemInArray.paidTo+"</td><td>"+oneItemInArray.ammount+"</td><td>"+oneItemInArray.paidOn+"</td><td>"+'<button id="'+oneItemInArray.childKey+'" type="button" class="btn btn-danger btnRemovePay"> X </button>'+"</td></tr>";
 			allDataRows += sSingleRow;
 		}
 		$("#idTableOfPaid").append(allDataRows);
