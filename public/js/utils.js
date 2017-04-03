@@ -179,5 +179,28 @@ var utilsObj = {
 
 		console.groupEnd();
 		return result;
+	},
+	//
+	sortAllByDate(allDataSnapshot){
+		console.log('sortAllByDate, allDataSnapshot',allDataSnapshot);
+		//console.log('sortAllByDate, allDataSnapshot.val()',allDataSnapshot.val());
+		
+		var aPayments = [];
+		allDataSnapshot.forEach(function(childSnapshot){
+			var obj = childSnapshot.val();
+			var childKey = childSnapshot.key;
+			
+			//console.log('Key',childKey);
+			//paidOn
+
+			if((childKey==='persons')||(childKey==='projects')){
+				//Do Nothing
+				console.log('Exclude : childKey',childKey,obj);
+			}else{
+				aPayments.push(obj)
+			}
+		});
+		//
+		console.log('aPayments',aPayments);
 	}
 };

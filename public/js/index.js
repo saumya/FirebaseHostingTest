@@ -104,7 +104,7 @@ $(function() {
 			
 			//$("#idMsg").html(UserObj.firebase.user.displayName+" you just paid to <h3>"+paidTo+"</h3>");
 			//$("#idMsg").show();
-			//console.log('snapshot:',snapshot);
+			console.log('snapshot:',snapshot);
 			//console.log('snapshot.val():',snapshot.val());
 
 			dataSnapshot = snapshot;
@@ -203,26 +203,12 @@ $(function() {
 		var allDataRows = '';
 		var totalPaid = 0;
 
+		var allPayments = utilsObj.sortAllByDate(dataSnapshot)
+
+		/*
 		dataSnapshot.forEach(function(childSnapshot) {
-			//snapshot.forEach(function(childSnapshot) {
 			var childKey = childSnapshot.key;
 			var childData = childSnapshot.val();
-			//console.log('childData:',childData);
-			console.log('childKey',childKey);
-			//console.log('userId',userId,':: paidById',childData.paidById)
-			
-			// NO need for this check now. As each user has its DB url unique
-			/*
-			if(childData.paidById === userId){
-				//console.log('childData:',childData);
-				// render this data
-				var s = "<tr><td>"+childData.paidTo+"</td><td>"+childData.ammount+"</td><td>"+childData.paidOn+"</td><td>"+'<button id="'+childKey+'" type="button" class="btn btn-danger btnRemovePay"> X </button>'+"</td></tr>";
-				//console.log(s);
-				allDataRows += s;
-				//
-				totalPaid += Number(childData.ammount);
-			}
-			*/
 
 			//remove the 'projects' and 'persons' data
 			if((childKey==='projects')||(childKey==='persons')){
@@ -248,7 +234,8 @@ $(function() {
 				allDataRows += s;
 				totalPaid += Number(childData.ammount);
 			}//END if-else
-		});
+		});*/
+
 
 		//console.log('Total Paid : ',totalPaid);
 		//$("#idTotalExpense").html(' Total '+totalPaid+' Rupees.');
