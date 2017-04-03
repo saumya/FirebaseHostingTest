@@ -180,7 +180,7 @@ var utilsObj = {
 		console.groupEnd();
 		return result;
 	},
-	//
+	// Descending order
 	sortAllByDate(allDataSnapshot){
 		console.log('sortAllByDate, allDataSnapshot',allDataSnapshot);
 		//console.log('sortAllByDate, allDataSnapshot.val()',allDataSnapshot.val());
@@ -195,12 +195,22 @@ var utilsObj = {
 
 			if((childKey==='persons')||(childKey==='projects')){
 				//Do Nothing
-				console.log('Exclude : childKey',childKey,obj);
+				//console.log('Exclude : childKey',childKey,obj);
 			}else{
+				obj.childKey = childKey;
 				aPayments.push(obj)
 			}
 		});
 		//
-		console.log('aPayments',aPayments);
+		//console.log('aPayments: un sorted :',aPayments);
+		// sort the array
+		aPayments.sort(function(a,b){
+			return(
+				 (new Date(a['paidOn']).getTime()) - (new Date(b['paidOn']).getTime())
+			)
+		});
+		console.log('aPayments: sorted :',aPayments);
+
+		return aPayments;
 	}
 };

@@ -236,6 +236,23 @@ $(function() {
 			}//END if-else
 		});*/
 
+		var childData,childKey,s,s1,s2 = '';
+		for (var i = allPayments.length - 1; i >= 0; i--) {
+			childData = allPayments[i]
+			childKey = '';//TODO: fix this
+			s1 = "<tr style='line-height:3em;background:#CCCCCC;border-style:solid;border-width:1px;'><td>"+childData.paidTo+"</td><td>"+childData.ammount+"</td><td>"+childData.paidOn+"</td><td>"+'<button id="'+childData.childKey+'" type="button" class="btn btn-danger btnRemovePay"> X </button>'+"</td></tr>";
+			//s2 = "<tr style='background:#AAAAAA;'><td colspan='4'> for <strong>"+childData.paidForProject+"</strong></td></tr>";
+			if(childData.paidForProject===''){
+				//Do Nothing
+			}else{
+				// paidForProject
+				s2 = "<tr style='background:#AAAAAA;'><td colspan='4'> for <strong>"+childData.paidForProject+"</strong></td></tr>";
+			}
+			s = s1+s2;
+			allDataRows += s;
+			totalPaid += Number(childData.ammount);
+		}
+
 
 		//console.log('Total Paid : ',totalPaid);
 		//$("#idTotalExpense").html(' Total '+totalPaid+' Rupees.');
