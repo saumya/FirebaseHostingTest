@@ -285,7 +285,7 @@ var utilsObj = {
 				 (new Date(a['paidOn']).getTime()) - (new Date(b['paidOn']).getTime())
 			)
 		});
-		console.log('aPayments: sorted :',aPayments);
+		//console.log('aPayments: sorted :',aPayments);
 
 		return aPayments;
 	}
