@@ -37,7 +37,6 @@ Currently its working fine as a proto.
  - Make Person dropdown
  - Make Project dropdown
  - UI redesign
- - Check for implemeting this in a framework
  - Check if Native would be good or PWA
 
 
