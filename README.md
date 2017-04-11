@@ -25,9 +25,6 @@ Currently its working fine as a proto.
 - Add payment
 - View by Person, Project, Date
 
-### WIP
-
- - Re-writing this with ReactJS
 
 
 ### TODO
