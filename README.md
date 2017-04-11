@@ -32,10 +32,6 @@ Currently its working fine as a proto.
 
 ### TODO
 
- - Add Project
- - Add Person
- - Make Person dropdown
- - Make Project dropdown
  - UI redesign
  - Check if Native would be good or PWA
 
