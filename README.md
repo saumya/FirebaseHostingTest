@@ -29,8 +29,6 @@ Currently its working fine as a proto.
 
 ### TODO
  
- - WIP, the data structure change
- - UI redesign
  - Check if Native would be good or PWA
 
 
