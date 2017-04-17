@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Expense</title>
+
+  <!--  jQuery CDN
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  -->
+
+  <!-- Google CDN : https://developers.google.com/speed/libraries/ -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <!--
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+  -->
+
+  <!-- Bootstrap -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase.js"></script>
+
+  <style type="text/css">
+    .clsHeaderInfo {
+      font-size: 1.5em;
+    }
+    .center-block {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+
+</head>
+<body style="padding-top: 70px;">
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <h6>
+        <span id="idloggedInUser" class="clsHeaderInfo"></span>
+        <h5 class="text-danger">The old app is deprecated.</h5>
+        <!-- <button id="btnLogin" class="btn btn-primary" type="button">Login</button> -->
+        <button id="btnLogout" class="btn btn-primary" type="button">Logout</button>
+        <button id="btnAddPay" class="btn btn-primary" type="button">Add</button>
+        <button id="btnViewPay" class="btn btn-primary" type="button">View</button>
+        <span id="idTotalExpense" class="clsHeaderInfo"></span>
+      </h6>
+      <h4 id="idShortInfo">
+        <span class="label label-info">Shot information</span> 
+      </h4>
+    </div>
+  </nav>
+  
+  <!--
+  <!-- removing the bottom bar --
+  <nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+      <h5>Expense. Beta 1.0.0</h5>
+    </div>
+  </nav>
+  -->
+
+  <div id="idMessages" class="container-fluid">
+    <div id="idMsg" class="alert alert-success" role="alert"></div>
+  </div>
+
+  <div id="idHomeScreen" class="container-fluid">
+    <h4>Expense.</h4>
+    <h3 class="text-danger">Start using the new app.</h3>
+    
+    <h4 id="idHomeScreenDate"></h4>
+    <a class="btn btn-danger" href="/next">New App. V3.0.0.</a>
+    <p class="text-danger">
+      Automatic data transfer is done for you.
+    </p>
+
+    <h4>Track by Date, Person and Project.</h4>
+    <div class="center-block" style="width:400px;height:300px;">
+      <img src="http://lorempixel.com/400/300?random" />
+    </div>
+    <h2>Please login to continue.</h2>
+    <h6>Beta 3.2.0</h6>
+  </div>
+
+  <div id="idFormToFill" class="container-fluid">
+    <h5>Fillup your expenses.</h5>
+    <form>
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">Paid to</span>
+        <input id="idPaidTo" type="text" class="form-control" placeholder="person name" aria-describedby="basic-addon1"/>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">Rupees</span>
+        <input id="idPaidAmmount" type="text" class="form-control" placeholder="100" aria-label="Amount (to the nearest Rupees)"/>
+        <span class="input-group-addon">.00</span>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">Date</span>
+        <input id="idPaidDate" type="date" class="form-control"/>
+      </div>
+
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon2">for Project</span>
+        <input id="idPaidForProject" type="text" class="form-control" placeholder="project name" aria-describedby="basic-addon2"/>
+      </div>
+      
+      <div style="padding-top: 0.2em; padding-bottom: 0.2em;"></div>
+      <button id="idBtnPaid" type="button" class="btn btn-success">Paid</button>
+    </form>
+
+  </div>
+
+  <div id="idDataToShow" class="container-fluid">
+
+    <div id="idInfoTotalForDayContainer" class="alert alert-warning alert-dismissible" role="alert">
+      <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+      <strong>Total</strong>.
+      <span id="idInfoTotalForDay">Better check yourself, you're not looking too good.</span> 
+    </div>
+    
+    <div class="row">
+      <div class="btn-group btn-group-justified" role="group" aria-label="...">
+        
+        <div class="btn-group" role="group">
+          <input id="idInputTotalByDate" type="date" class="form-control"/>
+        </div>
+
+        <!--
+        <div class="btn-group" role="group">
+          <button id="btnTotalByDate" type="button" class="btn btn-info">Total on Date</button>
+        </div>
+        -->
+        
+        <div class="btn-group" role="group">
+          <button id="btnShowByDate" type="button" class="btn btn-info">Show By Date</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="btn-group btn-group-justified" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+          <input id="idInputTotalToPerson" type="text" class="form-control"/>
+        </div>
+        <!--
+        <div class="btn-group" role="group">
+          <button id="btnTotalByPerson" type="button" class="btn btn-info">Total on Person</button>
+        </div>
+        -->
+        <div class="btn-group" role="group">
+          <button id="btnShowByPerson" type="button" class="btn btn-info">Show By Person</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="btn-group btn-group-justified" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+          <input id="idInputTotalToProject" type="text" class="form-control"/>
+        </div>
+        <!-- <div class="btn-group" role="group">
+          <button id="btnTotalToProject" type="button" class="btn btn-info">Total on Project</button>
+        </div> -->
+        <div class="btn-group" role="group">
+          <button id="btnShowByProject" type="button" class="btn btn-info">Show By Project</button>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="row">
+      <table id="idTableOfPaid" class="table table-striped">
+        <tr class="info">
+          <td>To</td>
+          <td>Ammount</td>
+          <td>On</td>
+          <td>Remove</td>
+        </tr>
+        
+      </table>
+  
+    </div>
+
+    <!--
+    <div class="row">
+      <div class="col-xs-3" style="background-color: #AAAAAA"> <span class="label"><strong>To</strong></span> </div>
+      <div class="col-xs-3" style="background-color: #AAAAAA"> <span class="label"><strong>Ammount</strong></span> </div>
+      <div class="col-xs-3" style="background-color: #AAAAAA"> <span class="label"><strong>On</strong></span> </div>
+      <div class="col-xs-3" style="background-color: #AAAAAA"> <span class="label"><strong>Remove</strong></span> </div>
+    </div>
+    <div class="row">
+      <div id="idTableOfPaid">
+      </div>
+    </div>
+    -->
+
+    
+
+  </div>
+
+
+  <script src="js/config.js" crossorigin="anonymous"></script>
+  <script src="js/utils.js" crossorigin="anonymous"></script>
+  <script src="js/index.js" crossorigin="anonymous"></script>
+</body>
+</html>
