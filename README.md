@@ -20,6 +20,11 @@ var allConfig = {
 
 Currently its working fine as a proto.
 
+### Making a HomeApp
+ - [understanding the manifest for web app][1]
+ - [Reference 2][2]
+
+
 ### Done
 
 - Add payment
@@ -32,6 +37,12 @@ Currently its working fine as a proto.
  - Check if Native would be good or PWA
 
 
+
+
+
+
+[1]: https://thishereweb.com/understanding-the-manifest-for-web-app-3f6cd2b853d6
+[2]: https://webdesign.tutsplus.com/articles/quick-tip-give-your-website-an-ios-home-screen-icon--webdesign-10067
 
 
 
