@@ -38,35 +38,60 @@
   <!--  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="iconfilename-precomposed.png" /> -->
   <!-- /App -->
 
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
   <title>Expense</title>
 
   <style type="text/css">
+    html{
+      font-family: 'Roboto Mono', monospace;
+    }
     .center-block {
       display: block;
       margin-left: auto;
       margin-right: auto;
       width: 98%;
-      background: #fff4df;
+      background: #3f0163;
+      color: #FFFFFF;
       text-align: center;
       padding-top: 4px;
       padding-bottom: 2px;
     }
     .btn {
       display: block;
-      padding: 10px;
-      font-size: 2em;
+      padding: 1em;
+      margin: 1em;
+      font-size: 1.4em;
       text-decoration: none;
-      background-color: #FFFF00;
+      background-color: #5c0090;
+      color:#FFFFFF;
     }
     .btn:hover{
-      background-color: #00FF00;
+      background-color: #7c00c3;
+    }
+    .btn-Beta{
+      display: block;
+      padding: 0.4em;
+      margin: 1em 8em 1em 8em;
+
+      font-size: 1.0em;
+      text-decoration: none;
+      background-color: #540084;
+      color:#FFFFFF;
     }
     .cls-mail{
-      background: #fbd54c;
+      background: #50027d;
+      border-style: solid;
+      border-width: 0.2em;
+      border-color: #340052;
+
       padding-top: 0.2em;
       padding-bottom: 0.2em;
       padding-left: 1em;
       padding-right: 1em;
+    }
+    .intro-txt{
+      font-size: 0.8em;
     }
   </style>
 
@@ -74,15 +99,19 @@
 <body>
   <div class="center-block">
     <h1>Expense</h1>
-    <h3>Personal Money Manager</h3>
-    <p>
-      Fill it and forget it. We do the rest. Thank you for using.
-    </p>
-    <p>
-      Your feedback is most valuable to us.
-    </p>
+    <div class="intro-txt">
+      <p>Fill it wherever you want it and whenever you want it. </p>
+      <p>Your feedback is most valuable to us. </p>
+      <h2>Track your expenses</h2>  
+    </div>
+    
+    <!-- <a class="btn" href="/next">Stable 2.0</a> -->
+
+    <a class="btn" href="/v3">Beta 3.0</a>
+    
+    <p>Thank you for using.</p>
     <h4>reach us at : <span class="cls-mail">2saumyaray@gmail.com</span> </h4>
-    <a class="btn" href="/next"> Go to the Application</a>
+
     <img src="expense-1.svg" width="100%" />
   </div>
 </body>
