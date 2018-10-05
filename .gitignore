@@ -1,4 +1,7 @@
 
+# firebase
+.firebase/
+
 # Config and settings
 public/js/config.js
 
